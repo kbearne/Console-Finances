@@ -87,41 +87,70 @@ var finances = [
   ['Feb-2017', 671099],
 ];
 
-// variables:
-  // total number of months
-  // rolling total of profits
-  // greatest increase (month & amount)
-  // greatest loss (month & amount)
-  // average of changes
+// Variables
+const totalMonths = finances.length; // total number of months
+let profitsAndLosses = 0; // rolling (net) total of profitsAndLosses over the entire period
+let greatestIncrease = 0; // greatest increase (amount)
+let greatestIncreaseMonth; // greatest increase (month)
+let greatestDecrease = 0; // greatest loss (amount)
+let greatestDecreaseMonth; // greatest loss (month)
+let averagesArray = [];;  // average of changes
+let addAverages = 0;
+let averageChange = 0;
 
-  // (inside loop)
-  // current data point
-  // previous data point
+for (let i = 0, length = finances.length; i < length; i++){
 
-// You have been given a dataset composed of arrays with two fields, Date and Profit/Losses.
-// Your task is to write JavaScript code that analyzes the records to calculate each of the following:
+  // Add together profits and losses for entire period
+  profitsAndLosses += finances[i][1];
 
-// The total number of months included in the dataset.
-  // finances.length
+  // Ensure that index is higher than 0
+  if (i > 0){
+  
+  // Store current month, previous month and previous month values in variables
+  let currentMonth = finances[i][0];
+  let currentValue = finances[i][1];
+  let prevValue = finances[i - 1][1];
 
-// The net total amount of Profit/Losses over the entire period.
-  // variable for profitsAndLosses
-  // compare data for loop we're running to data from previous loop
-    // variables for current and previous loops once we start the loop
-    // if statement so that we are at least on month 2 (array index 1) before figuring out profits / losses
+  // Push monthly averages to an averages array
+  averagesArray.push(currentValue - prevValue);
 
-// The average of the changes in Profit/Losses over the entire period.
-  // variable for tracking the average change (will make use of current and previous variables previously declared)
+  // Calculate the current running increase
+  let runningIncrease = currentValue - prevValue;
 
-// You will need to track what the total change in Profit/Losses are from month to month and then find the average.
-// (Total/(Number of months - 1))
+  // Compare the current running increase against the previous highest greatest increase and store the highest in the variable greatestIncrease
+  if (greatestIncrease < runningIncrease){
+    greatestIncrease = runningIncrease;
+    greatestIncreaseMonth = currentMonth;
+  }
 
-// The greatest increase in Profit/Losses (date and amount) over the entire period.
-  // variable for greatest increase
-  // on each iteration, compare current change in profits/losses with what's currently stored
-  // If the change is more, replace what's currently stored in the variable
+  // Calculate the current running decrease
+  let runningDecrease = currentValue - prevValue;
 
-// The greatest decrease in Profit/Losses (date and amount) over the entire period.
-  // variable for greatest decrease
-  // on each iteration, compare current change in profits/losses with what's currently stored
-  // If the loss is greater, replace what's currently stored in the variable
+  // Compare the current running decrease against the previous greatest loss and store the highest in the variable greatestDecrease
+  if (greatestDecrease > runningDecrease){
+    greatestDecrease = runningDecrease;
+    greatestDecreaseMonth = currentMonth;
+  }
+
+}
+}
+
+// Add together all averages stored within averagesArray
+for (let j = 0, length = averagesArray.length; j < length; j++){
+  addAverages += averagesArray[j];
+}
+
+// Calculate the average and round to nearest 100th
+averageChange = (addAverages / averagesArray.length);
+averageChange = averageChange.toFixed(2);
+
+// Print results to console
+console.log(`
+Financial Analysis
+----------------
+Total months: ${totalMonths}
+Total: $${profitsAndLosses}
+Average change: ${averageChange}
+Greatest increase in Profits/Losses: ${greatestIncreaseMonth} ($${greatestIncrease})
+Greatest decrease in Profits/Losses: ${greatestDecreaseMonth} ($${greatestDecrease})
+`);
