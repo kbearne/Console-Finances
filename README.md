@@ -10,7 +10,7 @@ This project fullfils the criteria of building an app (in JavaScript) which anal
 - The greatest increase in profits (date and difference in the amounts) over the entire period.
 - The greatest decrease in losses (date and difference in the amounts) over the entire period.
 
-![Screenshot of the website](./assets/images/websiteScreenshot.png)
+![Screenshot of the website](websiteScreenshot.png)
 
 ## Installation
 
@@ -18,7 +18,7 @@ N/A
 
 ## Usage
 
-Access the deployed application at the following URL: ....
+Access the deployed application at the following URL: https://kbearne.github.io/Console-Finances/
 
 Results of the script can be viewed in the console.
 
