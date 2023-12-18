@@ -10,7 +10,7 @@ This project fullfils the criteria of building an app (in JavaScript) which anal
 - The greatest increase in profits (date and difference in the amounts) over the entire period.
 - The greatest decrease in losses (date and difference in the amounts) over the entire period.
 
-![Screenshot of the website](websiteScreenshot.png)
+![Screenshot of the website](/assets/images/websiteScreenshot.png)
 
 ## Installation
 
